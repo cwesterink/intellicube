@@ -1,4 +1,4 @@
-#include "TimerMode.h"
+#include "modes/TimerMode.h"
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 
@@ -36,15 +36,15 @@ void TimerMode::onButtonClick() {
 
 void TimerMode::display() {
 
-    _screen.clear();
+    lcd.clear();
 
-    _screen.print("Timer Mode ");
-    _screen.print(_state);
+    lcd.print("Timer Mode ");
+    lcd.print(_state);
     if (_state == SETUP) {
-        _screen.setCursor(0, 1);
-        _screen.print("Set time: ");
-        _screen.print(_timerDuration / 1000 / 60);
-        _screen.print("mins");
+        lcd.setCursor(0, 1);
+        lcd.print("Set time: ");
+        lcd.print(_timerDuration / 1000 / 60);
+        lcd.print("mins");
     }
     if (_state == RUNNING) {
 
@@ -53,14 +53,14 @@ void TimerMode::display() {
         uint16_t minutes = totalSeconds / 60;
         uint16_t seconds = totalSeconds % 60;
 
-        _screen.setCursor(0, 1);
-        _screen.print("Remaining: ");
-        _screen.print(minutes);
-        _screen.print("m ");
-        _screen.print(seconds);
-        _screen.print("s");
+        lcd.setCursor(0, 1);
+        lcd.print("Remaining: ");
+        lcd.print(minutes);
+        lcd.print("m ");
+        lcd.print(seconds);
+        lcd.print("s");
     }
-    _screen.display();
+    lcd.display();
 }
 
 unsigned long TimerMode::encoderValueToDuration(long value) {

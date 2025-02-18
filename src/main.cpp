@@ -19,19 +19,19 @@ const int ENCODER_DATA_PIN = 3;
 Cube cube(SENSOR_PINS);
 Encoder encoder(ENCODER_CLOCK_PIN, ENCODER_DATA_PIN);
 Button button(BUTTON_PIN);
-LiquidCrystal_I2C screen(0x27, 20, 4);
+LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 RTC_DS3231 rtc;
 
 
 
 Mode* modes[6] = {
-    new IdleMode(screen, rtc),
-    new TimerMode(screen),
-    new HabitMode(screen),
-    new IdleMode(screen, rtc),
-    new IdleMode(screen, rtc),
-    new IdleMode(screen, rtc)
+    new IdleMode(),
+    new TimerMode(),
+    new HabitMode(),
+    new IdleMode(),
+    new IdleMode(),
+    new IdleMode()
 };
 
 Mode *currentMode;
@@ -41,25 +41,25 @@ int32_t prevEncoderPosition  = 0;
 face_t prevFace = 5;
 face_t face = 5;
 
-void setupScreen() {
-    screen.init();
-    screen.backlight();
-    screen.home();
-    screen.print("Hello, world!");
+void setuplcd() {
+    lcd.init();
+    lcd.backlight();
+    lcd.home();
+    lcd.print("Hello, world!");
 }
 
 void setup() {
     Wire.begin();
     Serial.begin(9600); // starts serial communication at 9,600 baud (the rate)
-    setupScreen();
+    setuplcd();
 
     if (!rtc.begin()) {
-        screen.setCursor(0, 0);
-        screen.print("RTC NOT FOUND");
+        lcd.setCursor(0, 0);
+        lcd.print("RTC NOT FOUND");
         while (1);
     }
 
-    currentMode = new IdleMode(screen, rtc);
+    currentMode = new IdleMode();
 }
 
 void loop() {

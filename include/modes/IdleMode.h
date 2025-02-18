@@ -8,16 +8,16 @@
 #include <Encoder.h>
 #include <RTClib.h>
 
+extern LiquidCrystal_I2C lcd;
+extern RTC_DS3231 rtc;
+
 class IdleMode : public Mode {
     public:
-        IdleMode(LiquidCrystal_I2C &screen, RTC_DS3231 &rtc)
-            : Mode(screen), _screen(screen), _rtc(rtc) {}
+        IdleMode() {};
         void update() override;    // Update the timer (elapsed time)
         void display() override;   // Display the timer on the LCD
 
     private:
-        LiquidCrystal_I2C &_screen;  // LCD screen
-        RTC_DS3231 &_rtc;
         char _dateStr[20];
         char _timeStr[20];
         char _message[20];

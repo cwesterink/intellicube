@@ -1,4 +1,4 @@
-#include "IdleMode.h"
+#include "modes/IdleMode.h"
 #include "Mode.h"
 #include <Arduino.h>
 #include <RTClib.h>
@@ -17,7 +17,7 @@ const char* monthAbbrev(int m) {
 void IdleMode::update() {
 
     // Update the idle mode logic
-    DateTime now = _rtc.now();
+    DateTime now = rtc.now();
     
     uint8_t hr = now.hour();
 
@@ -42,12 +42,12 @@ void IdleMode::update() {
 
 void IdleMode::display() {
     // Display the idle mode on the LCD
-    _screen.clear();
+    lcd.clear();
     // Display on LCD
-    _screen.clear();
-    _screen.setCursor(2, 0); _screen.print(_dateStr);
-    _screen.setCursor(2, 1); _screen.print(_timeStr);
-    _screen.setCursor(0, 2); _screen.print("--------------------");
+    lcd.clear();
+    lcd.setCursor(2, 0); lcd.print(_dateStr);
+    lcd.setCursor(2, 1); lcd.print(_timeStr);
+    lcd.setCursor(0, 2); lcd.print("--------------------");
 
-    _screen.setCursor(4, 3); _screen.print(_message);
+    lcd.setCursor(4, 3); lcd.print(_message);
 }

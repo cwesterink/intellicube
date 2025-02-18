@@ -7,6 +7,8 @@
 #include <LiquidCrystal_I2C.h>
 #include <Encoder.h>
 
+extern LiquidCrystal_I2C lcd;
+
 struct habit_t {
     String name;
     bool completed;
@@ -14,15 +16,13 @@ struct habit_t {
 
 class HabitMode : public Mode {
     public:
-        HabitMode(LiquidCrystal_I2C &screen)
-            : Mode(screen), _screen(screen) {}
+        HabitMode() {};
         void update() override;    // Update the timer (elapsed time)
         void display() override;   // Display the timer on the LCD
         void onButtonClick() override;
         int onEncoderChange(int32_t encoderVal) override;
 
     private:
-        LiquidCrystal_I2C &_screen;  // LCD screen
         habit_t _habits[4] = {
             {"Drink water", false},
             {"Exercise", false},

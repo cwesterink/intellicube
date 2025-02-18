@@ -7,10 +7,12 @@
 #include <LiquidCrystal_I2C.h>
 #include <Encoder.h>
 
+extern LiquidCrystal_I2C lcd;
+
 class TimerMode : public Mode {
     public:
-        TimerMode(LiquidCrystal_I2C &screen)
-            : Mode(screen), _screen(screen), _state(SETUP), _startTime(0), _elapsedTime(0), _timerDuration(0) {} // Constructor to initialize the mode with LCD screen
+        TimerMode()
+            : _state(SETUP), _startTime(0), _elapsedTime(0), _timerDuration(0) {};
         void update() override;    // Update the timer (elapsed time)
         void display() override;   // Display the timer on the LCD
         void onButtonClick() override;
@@ -21,8 +23,6 @@ class TimerMode : public Mode {
             SETUP,
             RUNNING,
         };
-
-        LiquidCrystal_I2C &_screen;  // LCD screen
         TimerState _state;  // Timer state
         unsigned long _startTime;  // Start time in milliseconds
         unsigned long _elapsedTime;  // Elapsed time in seconds

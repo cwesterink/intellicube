@@ -1,4 +1,4 @@
-#include "HabitMode.h"
+#include "modes/HabitMode.h"
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 
@@ -40,17 +40,17 @@ void HabitMode::display() {
         listedHabits[i] = &_habits[firstIdx + i];
     }
 
-    _screen.clear();
+    lcd.clear();
 
-    _screen.print("-------Habits-------");
+    lcd.print("-------Habits-------");
 
     for (int i = 0; i < 3; i++) {
-        _screen.setCursor(0, i + 1);
-        _screen.print(i+firstIdx == _selectedHabitId ? ">" : " ");
+        lcd.setCursor(0, i + 1);
+        lcd.print(i+firstIdx == _selectedHabitId ? ">" : " ");
         
-        _screen.print(listedHabits[i]->name);
-        _screen.setCursor(16, i + 1);
-        _screen.print(listedHabits[i]->completed ? "[X]" : "[ ]");
+        lcd.print(listedHabits[i]->name);
+        lcd.setCursor(16, i + 1);
+        lcd.print(listedHabits[i]->completed ? "[X]" : "[ ]");
     }
-    _screen.display();
+    lcd.display();
 }
