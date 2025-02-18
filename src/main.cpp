@@ -3,7 +3,6 @@
 #include "test.h"
 #include <Encoder.h>
 #include <LiquidCrystal_I2C.h>
-#include "utils/Button.h"
 #include "modes/TimerMode.h"
 #include "modes/IdleMode.h"
 #include "modes/HabitMode.h"

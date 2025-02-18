@@ -5,7 +5,7 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 #include <Encoder.h>
-#include "utils/Button.h"
+#include "Button.h"
 
 class Mode {
     public:

@@ -1,5 +1,6 @@
 #include <stdint.h>
-#include "utils/Debouncer.h"
+#include "Debouncer.h"
+
 #ifndef CUBE_H   // if not defined CUBE_H
 #define CUBE_H   // define CUBE_H
 
