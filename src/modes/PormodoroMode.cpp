@@ -6,19 +6,18 @@
 extern LiquidCrystal_I2C lcd;
 extern ClockManager clockManager;
 
-
 void PomodoroMode::onButtonEvent(ButtonEvent event) {
-    if (event == ButtonEvent::Click && !_isRunning) {
-        startPomodoro();
-    } else if (event == ButtonEvent::Hold && _isRunning) {
-        stopPomodoro();
+    if (event == ButtonEvent::Click && !clockManager.isPomodoroRunning()) {
+        clockManager.startPomodoroTimer(WORK_DURATION, BREAK_DURATION);
+    } else if (event == ButtonEvent::Hold && clockManager.isPomodoroRunning()) {
+        clockManager.stopPomodoroTimer();
     }
 }
 
 void PomodoroMode::display() {
     lcd.clear();
 
-    if (_isRunning) {
+    if (clockManager.isPomodoroRunning()) {
         uint32_t timeLeft = clockManager.getPomodoroTimeLeft();
         PomodoroState s = clockManager.getPomodoroState();
         uint32_t minutes = timeLeft / 60;
@@ -47,14 +46,4 @@ void PomodoroMode::display() {
         lcd.setCursor(6, 3);
         lcd.print("Click to start");
     }
-}
-
-void PomodoroMode::startPomodoro() {
-    clockManager.startPomodoroTimer(WORK_DURATION, BREAK_DURATION);
-    _isRunning = true;
-}
-
-void PomodoroMode::stopPomodoro() {
-    clockManager.stopPomodoroTimer();
-    _isRunning = false;
 }

@@ -2,10 +2,13 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 #include "Pins.h"
+#include "ClockManager.h"
+
+extern ClockManager clockManager;
 
 int32_t TimerMode::onEncoderChange(int32_t encoderVal) {
-    if (_state == SETUP) {
-        _timerDuration = encoderValueToDuration(encoderVal);
+    if (!clockManager.isTimerRunning()) {
+        _timerDuration = encoderValueToSeconds(encoderVal);
         if (encoderVal < 0) {
             return 0;
         }
@@ -13,25 +16,12 @@ int32_t TimerMode::onEncoderChange(int32_t encoderVal) {
     return encoderVal;
 }
 
-
-void TimerMode::update() {
-    if (_state == RUNNING) {
-        _elapsedTime = (millis() - _startTime);
-        if (_elapsedTime >= _timerDuration) {
-            _state = SETUP;
-            tone(BUZZER_PIN, 1000, 2000);
-        }
-    }
-}
-
 void TimerMode::onButtonEvent(ButtonEvent event) {
-    if (event == ButtonEvent::Click) {
-        if (_state == SETUP) {
-            _state = RUNNING;
-            _startTime = millis();
-        } else if (_state == RUNNING) {
-            _state = SETUP;
-        }
+    if (event == ButtonEvent::Click && !clockManager.isTimerRunning()) {
+        clockManager.startTimer(_timerDuration);
+        _timerDuration = 0;
+    } else if (event == ButtonEvent::Hold && clockManager.isTimerRunning()) {
+        clockManager.stopTimer();
     }
 }
 
@@ -39,20 +29,17 @@ void TimerMode::display() {
 
     lcd.clear();
 
-    lcd.print("Timer Mode ");
-    lcd.print(_state);
-    if (_state == SETUP) {
+    lcd.print("Timer");
+    if (!clockManager.isTimerRunning()) {
         lcd.setCursor(0, 1);
         lcd.print("Set time: ");
-        lcd.print(_timerDuration / 1000 / 60);
+        lcd.print(_timerDuration / 60);
         lcd.print("mins");
-    }
-    if (_state == RUNNING) {
+    } else {
+        uint32_t timeLeft = clockManager.getTimeLeft();
 
-        unsigned long remainingTime = _timerDuration - _elapsedTime;
-        uint32_t totalSeconds = remainingTime / 1000;
-        uint16_t minutes = totalSeconds / 60;
-        uint16_t seconds = totalSeconds % 60;
+        uint16_t minutes = timeLeft / 60;
+        uint16_t seconds = timeLeft % 60;
 
         lcd.setCursor(0, 1);
         lcd.print("Remaining: ");
@@ -61,13 +48,12 @@ void TimerMode::display() {
         lcd.print(seconds);
         lcd.print("s");
     }
-    lcd.display();
 }
 
-unsigned long TimerMode::encoderValueToDuration(long value) {
+unsigned long TimerMode::encoderValueToSeconds(long value) {
     if (value < 0) {
        return 0;
     }
 
-    return (value / 4) * 60 * 1000;
+    return (value / 4) * 60;
 }
