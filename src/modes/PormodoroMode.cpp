@@ -33,7 +33,7 @@ void PomodoroMode::display() {
         lcd.print(seconds);
         lcd.print("s");
     } else {
-        lcd.print("Pomodoro Mode");
+        lcd.print("Study Mode");
         lcd.setCursor(0, 1);
         lcd.print("Work: ");
         lcd.print(WORK_DURATION / 60);
