@@ -5,6 +5,7 @@
 #include "modes/IdleMode.h"
 #include "modes/TimerMode.h"
 #include "modes/HabitMode.h"
+#include "modes/PormodoroMode.h"
 #include "Cube.h"
 
 class ModeManager {
