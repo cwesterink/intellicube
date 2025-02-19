@@ -9,93 +9,79 @@
 
 #include "Mode.h"
 #include <RTClib.h>
+#include <ModeManager.h>
 
+// Pin definitions
 const int SENSOR_PINS[4] = {7, 6, 5, 4};
 const int BUTTON_PIN = 8;
 
 const int ENCODER_CLOCK_PIN = 2;
 const int ENCODER_DATA_PIN = 3;
 
+// Cube representation 
 Cube cube(SENSOR_PINS);
+
+// Mode manager (manages mode trasitions)
+ModeManager modeManager;
+
+// Inputs
 Encoder encoder(ENCODER_CLOCK_PIN, ENCODER_DATA_PIN);
 Button button(BUTTON_PIN);
-LiquidCrystal_I2C lcd(0x27, 20, 4);
-
 RTC_DS3231 rtc;
 
-
-
-Mode* modes[6] = {
-    new IdleMode(),
-    new TimerMode(),
-    new HabitMode(),
-    new IdleMode(),
-    new IdleMode(),
-    new IdleMode()
-};
-
-Mode *currentMode;
+// 20x4 LCD Display
+LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 int32_t prevEncoderPosition  = 0;
 
-face_t prevFace = 5;
-face_t face = 5;
-
-void setuplcd() {
+void setupLCD() {
     lcd.init();
     lcd.backlight();
     lcd.home();
-    lcd.print("Hello, world!");
+    lcd.print("Loading...");
 }
 
-void setup() {
-    Wire.begin();
-    Serial.begin(9600); // starts serial communication at 9,600 baud (the rate)
-    setuplcd();
-
+void setupRTC() {
     if (!rtc.begin()) {
         lcd.setCursor(0, 0);
         lcd.print("RTC NOT FOUND");
         while (1);
     }
+}
 
-    currentMode = new IdleMode();
+void setup() {
+    Wire.begin();
+    Serial.begin(9600);
+
+    setupLCD();
+    setupRTC();
 }
 
 void loop() {
+    
+    face_t face = cube.getFace();
+    
+    modeManager.update(face);
+    modeManager.display();
 
-    face = cube.getFace();
-    if (face != prevFace) {
-        Serial.print("Face: ");
-        Serial.println(face);
-        prevFace = face;
-
-        currentMode = modes[face];
-    }
-
+    // Handle encoder input
     int32_t encoderPosition = -1 * encoder.read();
     if (encoderPosition != prevEncoderPosition) {
-        int newPosition = currentMode->onEncoderChange(encoderPosition);
-        if (newPosition != -1) {
-            encoder.write(-newPosition);
-            prevEncoderPosition = newPosition;
+        int32_t setPosition = modeManager.onEncoderChange(encoderPosition);
+        if (setPosition != encoderPosition) {
+            encoder.write(-setPosition);
+            prevEncoderPosition = setPosition;
         } else {
             prevEncoderPosition = encoderPosition;
         }
     }
 
-    if (button.isPressed()) {
-        currentMode->onButtonClick();
-    }
-
-    for (size_t i = 0; i < 6; i++)
-    {
-        modes[i]->update();
+    button.update();
+    ButtonEvent event = button.getEvent();
+    if (event != ButtonEvent::None) {
+        modeManager.onButtonEvent(event);
     }
     
-    // currentMode->update();
-    currentMode->display();
-    // Serial.println(face);
-    delay(50); // slow the loop down a bit before it repeats
+    delay(50);
 }
 

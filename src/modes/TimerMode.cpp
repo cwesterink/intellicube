@@ -3,14 +3,14 @@
 #include <LiquidCrystal_I2C.h>
 
 
-int TimerMode::onEncoderChange(int32_t encoderVal) {
+int32_t TimerMode::onEncoderChange(int32_t encoderVal) {
     if (_state == SETUP) {
         _timerDuration = encoderValueToDuration(encoderVal);
         if (encoderVal < 0) {
             return 0;
         }
     }
-    return -1;
+    return encoderVal;
 }
 
 
@@ -24,13 +24,14 @@ void TimerMode::update() {
     }
 }
 
-
-void TimerMode::onButtonClick() {
-    if (_state == SETUP) {
-        _state = RUNNING;
-        _startTime = millis();
-    } else if (_state == RUNNING) {
-        _state = SETUP;
+void TimerMode::onButtonEvent(ButtonEvent event) {
+    if (event == ButtonEvent::Click) {
+        if (_state == SETUP) {
+            _state = RUNNING;
+            _startTime = millis();
+        } else if (_state == RUNNING) {
+            _state = SETUP;
+        }
     }
 }
 

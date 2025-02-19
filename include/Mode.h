@@ -10,10 +10,11 @@
 class Mode {
     public:
         Mode() {}
-        virtual void update() {};   // Update the mode logic
-        virtual void display() = 0;   // Display mode-specific info
-        virtual void onButtonClick() {};
-        virtual int onEncoderChange(int32_t encoderVal) { return 0; };
+        virtual void update() {};
+        virtual void display() = 0;
+
+        virtual void onButtonEvent(ButtonEvent event) {};
+        virtual int32_t onEncoderChange(int32_t encoderVal) { return encoderVal; };
 };
 
 #endif

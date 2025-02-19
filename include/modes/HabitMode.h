@@ -19,8 +19,9 @@ class HabitMode : public Mode {
         HabitMode() {};
         void update() override;    // Update the timer (elapsed time)
         void display() override;   // Display the timer on the LCD
-        void onButtonClick() override;
-        int onEncoderChange(int32_t encoderVal) override;
+
+        void onButtonEvent(ButtonEvent event) override;
+        int32_t onEncoderChange(int32_t encoderVal) override;
 
     private:
         habit_t _habits[4] = {
