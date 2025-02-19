@@ -8,7 +8,7 @@ ModeManager::ModeManager()
     modes[1] = new TimerMode();
     modes[2] = new HabitMode();
     modes[3] = new PomodoroMode();
-    modes[4] = new IdleMode();
+    modes[4] = new GameMode();
     modes[5] = new IdleMode();
 
     currentMode = modes[0];
