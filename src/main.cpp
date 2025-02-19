@@ -11,6 +11,7 @@
 #include <RTClib.h>
 #include <ModeManager.h>
 #include <ClockManager.h>
+#include <ColorModule.h>
 
 // Pin definitions
 const int SENSOR_PINS[4] = {7, 6, 5, 4};
@@ -25,6 +26,7 @@ Cube cube(SENSOR_PINS);
 // Mode manager (manages mode trasitions)
 ModeManager modeManager;
 ClockManager clockManager;
+ColorModule colorModule;
 
 // Inputs
 Encoder encoder(ENCODER_CLOCK_PIN, ENCODER_DATA_PIN);
@@ -63,9 +65,11 @@ void loop() {
     
     face_t face = cube.getFace();
 
+    colorModule.update(face);
     modeManager.update(face);
     clockManager.update();
     modeManager.display();
+    colorModule.display();
 
     // Handle encoder input
     int32_t encoderPosition = -1 * encoder.read();
@@ -85,6 +89,6 @@ void loop() {
         modeManager.onButtonEvent(event);
     }
     
-    delay(50);
+    delay(100);
 }
 
