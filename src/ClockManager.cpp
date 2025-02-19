@@ -1,4 +1,5 @@
 #include "ClockManager.h"
+#include "Pins.h"
 
 ClockManager::ClockManager()
     : regularTimerRunning(false), pomodoroRunning(false),
@@ -69,7 +70,7 @@ void ClockManager::checkTimers() {
     if (regularTimerRunning && now >= regularTimerEnd) {
         regularTimerRunning = false;
         Serial.println("Regular timer finished!");
-        tone(10, 1000, 2000);
+        tone(BUZZER_PIN, 1000, 2000);
     }
 
     // Check Pomodoro Timer
@@ -79,13 +80,13 @@ void ClockManager::checkTimers() {
             pomodoroState = PomodoroState::Break;
             pomodoroEnd = now + TimeSpan(breakDuration);
             Serial.println("Pomodoro work session complete! Break time.");
-            tone(10, 750, 2000);
+            tone(BUZZER_PIN, 750, 2000);
         } else {
             // Switch back to Work
             pomodoroState = PomodoroState::Work;
             pomodoroEnd = now + TimeSpan(workDuration);
             Serial.println("Pomodoro break complete! Back to work.");
-            tone(10, 500, 2000);
+            tone(BUZZER_PIN, 500, 2000);
         }
     }
 }

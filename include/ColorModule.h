@@ -7,7 +7,6 @@
 #include "Cube.h"
 
 const int LED_COUNT = 1;
-const int LED_PIN = 12;
 
 class ColorModule {
     public:

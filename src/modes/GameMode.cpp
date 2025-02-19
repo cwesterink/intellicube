@@ -1,6 +1,7 @@
 #include "modes/GameMode.h"
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
+#include "Pins.h"
 
 void GameMode::update() {
     // Update the game logic
@@ -8,7 +9,7 @@ void GameMode::update() {
         if (millis() - _startTime >= _waitTime) {
             _state = LIVE;
             _startTime = millis();
-            tone(10, 1000, 250);
+            tone(BUZZER_PIN, 1000, 250);
         }
     }
 }

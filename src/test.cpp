@@ -93,8 +93,7 @@ void testTwoDiagonalBlack(Cube cube) {
 }
 
 void testCube() {
-    const int SENSOR_PINS[4] = {0, 0, 0, 0};
-    Cube cube(SENSOR_PINS);
+    Cube cube;
 
     testAllBlack(cube);
     testOneBlack(cube);

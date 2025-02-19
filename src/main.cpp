@@ -13,15 +13,8 @@
 #include <ClockManager.h>
 #include <ColorModule.h>
 
-// Pin definitions
-const int SENSOR_PINS[4] = {7, 6, 5, 4};
-const int BUTTON_PIN = 8;
-
-const int ENCODER_CLOCK_PIN = 2;
-const int ENCODER_DATA_PIN = 3;
-
 // Cube representation 
-Cube cube(SENSOR_PINS);
+Cube cube;
 
 // Mode manager (manages mode trasitions)
 ModeManager modeManager;

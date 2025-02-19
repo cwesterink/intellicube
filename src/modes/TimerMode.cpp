@@ -1,7 +1,7 @@
 #include "modes/TimerMode.h"
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
-
+#include "Pins.h"
 
 int32_t TimerMode::onEncoderChange(int32_t encoderVal) {
     if (_state == SETUP) {
@@ -19,7 +19,7 @@ void TimerMode::update() {
         _elapsedTime = (millis() - _startTime);
         if (_elapsedTime >= _timerDuration) {
             _state = SETUP;
-            tone(10, 1000, 2000);
+            tone(BUZZER_PIN, 1000, 2000);
         }
     }
 }

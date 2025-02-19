@@ -1,14 +1,13 @@
 #include "Arduino.h"
 #include "Cube.h"
 
-Cube::Cube(const int sensorPins[4]): 
-    _sensorPins{0},
+Cube::Cube():
     _pattern{false},
     _faceDebouncer(0, 3000)
 {
     for (int i = 0; i < 4; i++) {
-        pinMode(sensorPins[i], INPUT);
-        _sensorPins[i] = sensorPins[i];
+        pinMode(SENSOR_PINS[i], INPUT);
+        _sensorPins[i] = SENSOR_PINS[i];
     }
 }
 
