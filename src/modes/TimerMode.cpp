@@ -55,5 +55,5 @@ unsigned long TimerMode::encoderValueToSeconds(long value) {
        return 0;
     }
 
-    return (value / 4) * 60;
+    return value * 60;
 }

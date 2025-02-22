@@ -1,6 +1,6 @@
 #include "ModeManager.h"
-
-extern Encoder encoder;
+#include "RotaryEncoder.h"
+extern RotaryEncoder encoder;
 
 ModeManager::ModeManager()
     : prevFace(255) {

@@ -6,11 +6,11 @@ int32_t HabitMode::onEncoderChange(int32_t encoderVal) {
     if (encoderVal < 0) {
         _selectedHabitId = 0;
         return 0;
-    } else if (encoderVal >= (_numHabits - 1) * 4) {
+    } else if (encoderVal >= (_numHabits - 1)) {
         _selectedHabitId = _numHabits - 1;
-        return (_numHabits - 1) * 4;
+        return _numHabits - 1;
     } else {
-        _selectedHabitId = encoderVal / 4;
+        _selectedHabitId = encoderVal;
         return encoderVal;
     }
 }

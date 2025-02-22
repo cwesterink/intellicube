@@ -8,6 +8,7 @@
 #include "modes/HabitMode.h"
 
 #include "Mode.h"
+#include "RotaryEncoder.h"
 #include <RTClib.h>
 #include <ModeManager.h>
 #include <ClockManager.h>
@@ -22,7 +23,7 @@ ClockManager clockManager;
 ColorModule colorModule;
 
 // Inputs
-Encoder encoder(ENCODER_CLOCK_PIN, ENCODER_DATA_PIN);
+RotaryEncoder encoder(ENCODER_CLOCK_PIN, ENCODER_DATA_PIN);
 Button button(BUTTON_PIN);
 RTC_DS3231 rtc;
 
@@ -65,15 +66,10 @@ void loop() {
     colorModule.display();
 
     // Handle encoder input
-    int32_t encoderPosition = -1 * encoder.read();
-    if (encoderPosition != prevEncoderPosition) {
-        int32_t setPosition = modeManager.onEncoderChange(encoderPosition);
-        if (setPosition != encoderPosition) {
-            encoder.write(-setPosition);
-            prevEncoderPosition = setPosition;
-        } else {
-            prevEncoderPosition = encoderPosition;
-        }
+    RotaryEncoderResult encoderResult = encoder.read();
+    if (encoderResult.changed) {
+        int32_t setPosition = modeManager.onEncoderChange(encoderResult.position);
+        encoder.write(setPosition);
     }
 
     button.update();
@@ -82,6 +78,6 @@ void loop() {
         modeManager.onButtonEvent(event);
     }
     
-    delay(100);
+    delay(150);
 }
 

@@ -48,8 +48,3 @@ void GameMode::onButtonEvent(ButtonEvent event) {
     }
 
 }
-
-int32_t GameMode::onEncoderChange(int32_t encoderVal) {
-    // Handle encoder changes
-    return encoderVal;
-}

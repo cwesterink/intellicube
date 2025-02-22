@@ -16,7 +16,6 @@ class GameMode : public Mode {
         void display() override;   // Display the timer on the LCD
 
         void onButtonEvent(ButtonEvent event) override;
-        int32_t onEncoderChange(int32_t encoderVal) override;
 
     private:
         enum State {
