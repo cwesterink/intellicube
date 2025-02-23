@@ -58,7 +58,7 @@ void setup() {
 void loop() {
     
     face_t face = cube.getFace();
-
+    Serial.println(face);
     colorModule.update(face);
     modeManager.update(face);
     clockManager.update();

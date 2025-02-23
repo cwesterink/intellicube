@@ -1,5 +1,6 @@
 #include "ModeManager.h"
 #include "RotaryEncoder.h"
+
 extern RotaryEncoder encoder;
 
 ModeManager::ModeManager()
@@ -9,7 +10,7 @@ ModeManager::ModeManager()
     modes[2] = new HabitMode();
     modes[3] = new PomodoroMode();
     modes[4] = new GameMode();
-    modes[5] = new IdleMode();
+    modes[5] = new SettingsMode();
 
     currentMode = modes[0];
 }

@@ -7,6 +7,7 @@
 #include "modes/HabitMode.h"
 #include "modes/PormodoroMode.h"
 #include "modes/GameMode.h"
+#include "modes/SettingsMode.h"
 
 #include "Cube.h"
 

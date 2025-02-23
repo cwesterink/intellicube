@@ -11,7 +11,9 @@ const int LED_COUNT = 1;
 class ColorModule {
     public:
         ColorModule();
+        void overrideColor(rgb_color color);
         void setColor(face_t face, rgb_color color);
+        rgb_color getColor(face_t face);
         void update(face_t face);
         void display();
 

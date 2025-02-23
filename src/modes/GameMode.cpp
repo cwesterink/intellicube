@@ -46,5 +46,4 @@ void GameMode::onButtonEvent(ButtonEvent event) {
             _state = SETUP;
         }
     }
-
 }

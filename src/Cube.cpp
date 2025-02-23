@@ -63,7 +63,7 @@ face_t Cube::_getRawFace() {
     switch (numOnes)
     {
     case 0:
-        return 0;
+        return 5;
     case 1:
         return 1;
     case 2:
@@ -75,7 +75,7 @@ face_t Cube::_getRawFace() {
     case 3:
         return 4;
     case 4:
-        return 5;
+        return 0;
 
     default:
         return -1;

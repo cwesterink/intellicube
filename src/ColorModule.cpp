@@ -18,6 +18,14 @@ void ColorModule::setColor(face_t face, rgb_color color) {
     _modeColor[face] = color;
 }
 
+void ColorModule::overrideColor(rgb_color color) {
+    _currentColor[0] = color;
+}
+
+rgb_color ColorModule::getColor(face_t face) {
+    return _modeColor[face];
+}
+
 void ColorModule::update(face_t face) {
     if (face != _prevFace) {
         _prevFace = face;
