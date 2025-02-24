@@ -6,7 +6,7 @@
 #include <PololuLedStrip.h>
 #include "Cube.h"
 
-const int LED_COUNT = 1;
+const int LED_COUNT = 42;
 
 class ColorModule {
     public:

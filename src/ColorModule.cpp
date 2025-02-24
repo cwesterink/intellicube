@@ -19,7 +19,9 @@ void ColorModule::setColor(face_t face, rgb_color color) {
 }
 
 void ColorModule::overrideColor(rgb_color color) {
-    _currentColor[0] = color;
+    for (int i = 0; i < LED_COUNT; i++){
+        _currentColor[i] = color;
+    }
 }
 
 rgb_color ColorModule::getColor(face_t face) {
@@ -29,7 +31,9 @@ rgb_color ColorModule::getColor(face_t face) {
 void ColorModule::update(face_t face) {
     if (face != _prevFace) {
         _prevFace = face;
-        _currentColor[0] = _modeColor[face];
+        for (int i = 0; i < LED_COUNT; i++){
+            _currentColor[i] = _modeColor[face];
+        }
     }
 }
 
