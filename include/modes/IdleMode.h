@@ -17,6 +17,8 @@ class IdleMode : public Mode {
         void update() override;    // Update the timer (elapsed time)
         void display() override;   // Display the timer on the LCD
 
+        String getName() override { return "Idle"; }
+
     private:
         char _dateStr[20];
         char _timeStr[20];

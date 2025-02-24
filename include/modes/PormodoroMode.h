@@ -11,6 +11,8 @@ public:
     void display() override;
     void onButtonEvent(ButtonEvent event) override;
 
+    String getName() override { return "Study Timer"; }
+
 private:
     int WORK_DURATION = 150;  // Default 25 min
     int BREAK_DURATION = 30;  // Default 5 min

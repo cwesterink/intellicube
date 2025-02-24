@@ -18,6 +18,8 @@ class TimerMode : public Mode {
         void onButtonEvent(ButtonEvent event) override;
         int32_t onEncoderChange(int32_t encoderVal) override;
 
+        String getName() override { return "Timer"; }
+
     private:
         unsigned long _timerDuration;
         unsigned long encoderValueToSeconds(long value);  // Convert encoder value to time in seconds

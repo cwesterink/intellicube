@@ -6,7 +6,7 @@ extern RotaryEncoder encoder;
 ModeManager::ModeManager()
     : prevFace(255) {
     modes[0] = new IdleMode();
-    modes[1] = new TimerMode();
+    modes[1] = new MultiMode("Clock", {new TimerMode(), new PomodoroMode()});
     modes[2] = new HabitMode();
     modes[3] = new PomodoroMode();
     modes[4] = new GameMode();

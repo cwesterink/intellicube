@@ -16,6 +16,8 @@ class SettingsMode : public Mode {
         void onButtonEvent(ButtonEvent event) override;
         int32_t onEncoderChange(int32_t encoderVal) override;
 
+        String getName() override { return "Settings"; }
+
     private:
         void displaySelection();
         void displayEdit();

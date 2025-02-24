@@ -20,6 +20,8 @@ class HabitMode : public Mode {
         void update() override;    // Update the timer (elapsed time)
         void display() override;   // Display the timer on the LCD
 
+        String getName() override { return "Habit"; }
+        
         void onButtonEvent(ButtonEvent event) override;
         int32_t onEncoderChange(int32_t encoderVal) override;
 

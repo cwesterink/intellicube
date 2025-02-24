@@ -12,6 +12,7 @@ class Mode {
         Mode() {}
         virtual void update() {};
         virtual void display() = 0;
+        virtual String getName() = 0;
 
         virtual void onButtonEvent(ButtonEvent event) {};
         virtual int32_t onEncoderChange(int32_t encoderVal) { return encoderVal; };
