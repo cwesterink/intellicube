@@ -5,8 +5,8 @@ PololuLedStrip<LED_PIN> ledStrip;
 
 ColorModule::ColorModule() : _prevFace(255) {
 
-    _modeColor[0] = {255, 0, 0};  
-    _modeColor[1] = {0, 255, 0};  
+    _modeColor[0] = {0, 255, 0};  
+    _modeColor[1] = {255, 0, 0};  
     _modeColor[2] = {0, 0, 255};  
     _modeColor[3] = {255, 255, 0};
     _modeColor[4] = {0, 255, 255};
