@@ -9,7 +9,7 @@ extern ClockManager clockManager;
 void PomodoroMode::onButtonEvent(ButtonEvent event) {
     if (event == ButtonEvent::Click && !clockManager.isPomodoroRunning()) {
         clockManager.startPomodoroTimer(WORK_DURATION, BREAK_DURATION);
-    } else if (event == ButtonEvent::Hold && clockManager.isPomodoroRunning()) {
+    } else if (event == ButtonEvent::DoubleClick && clockManager.isPomodoroRunning()) {
         clockManager.stopPomodoroTimer();
     }
 }

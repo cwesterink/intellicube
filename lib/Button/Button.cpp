@@ -2,7 +2,7 @@
 
 #define DEBOUNCE_DELAY 50          // Time to debounce button presses
 #define HOLD_TIME 1000             // Time in ms to detect a hold event
-#define DOUBLE_CLICK_TIME 400      // Time window for detecting a double-click
+#define DOUBLE_CLICK_TIME 600      // Time window for detecting a double-click
 
 Button::Button(uint8_t pin) : _pin(pin), _lastState(HIGH), _lastEvent(ButtonEvent::None) {
     pinMode(_pin, INPUT_PULLUP);

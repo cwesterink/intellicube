@@ -8,7 +8,13 @@ IdleMode idleMode;
 GameMode gameMode;
 HabitMode habitMode;
 RelaxMode relaxMode;
-TimerMode timerMode;
+
+PomodoroMode pomodoroMode;
+TimerMode defaultTimerMode;
+
+std::vector<Mode*> timerModes = {&pomodoroMode, &defaultTimerMode};
+
+MultiMode timerMode("Timer", timerModes);
 SettingsMode settingsMode;
 
 // HOME,
