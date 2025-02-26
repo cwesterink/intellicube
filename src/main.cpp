@@ -3,9 +3,7 @@
 #include "test.h"
 #include <Encoder.h>
 #include <LiquidCrystal_I2C.h>
-#include "modes/TimerMode.h"
-#include "modes/IdleMode.h"
-#include "modes/HabitMode.h"
+
 
 #include "Mode.h"
 #include "RotaryEncoder.h"
@@ -51,20 +49,19 @@ void setup() {
     Wire.begin();
     Serial.begin(9600);
 
+    Serial.println("Starting setup");
     setupLCD();
     setupRTC();
+    Serial.println("Setup complete");
 }
 
 void loop() {
-    
-    face_t face = cube.getFace();
-    Serial.println(face);
-    colorModule.update(face);
+    Face face = cube.getFace();
+
     modeManager.update(face);
     clockManager.update();
     modeManager.display();
-    colorModule.display();
-
+    colorModule.display(modeManager.getColor());
     // Handle encoder input
     RotaryEncoderResult encoderResult = encoder.read();
     if (encoderResult.changed) {

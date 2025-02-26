@@ -4,23 +4,21 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <PololuLedStrip.h>
-#include "Cube.h"
 
 const int LED_COUNT = 42;
 
 class ColorModule {
     public:
         ColorModule();
-        void overrideColor(rgb_color color);
-        void setColor(face_t face, rgb_color color);
-        rgb_color getColor(face_t face);
-        void update(face_t face);
-        void display();
-
+        // void overrideColor(rgb_color color); TODO: implement
+        void display(rgb_color color);
+        void turnOff();
+        void turnOn();
+        
     private:
-        rgb_color _modeColor[6];
-        rgb_color _currentColor[LED_COUNT];
-        face_t _prevFace;
+        rgb_color _prevColor;
+        rgb_color _colorArray[LED_COUNT];
+        bool _lights_on = true;
 };
 
 #endif

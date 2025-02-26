@@ -17,6 +17,8 @@ class IdleMode : public Mode {
         void update() override;    // Update the timer (elapsed time)
         void display() override;   // Display the timer on the LCD
 
+        rgb_color getColor() override { return { 200, 10, 0}; }
+
         String getName() override { return "Idle"; }
 
     private:

@@ -3,35 +3,53 @@
 
 extern RotaryEncoder encoder;
 
-ModeManager::ModeManager()
-    : prevFace(255) {
-    modes[0] = new IdleMode();
-    modes[1] = new MultiMode("Clock", {new TimerMode(), new PomodoroMode()});
-    modes[2] = new HabitMode();
-    modes[3] = new PomodoroMode();
-    modes[4] = new GameMode();
-    modes[5] = new SettingsMode();
+// Declare your modes somewhere globally or in setup
+IdleMode idleMode;
+GameMode gameMode;
+HabitMode habitMode;
+PomodoroMode pomodoroMode;
+TimerMode timerMode;
+SettingsMode settingsMode;
 
-    currentMode = modes[0];
+// HOME,
+// TIMER,
+// HABIT,
+// GAME,
+// RELAX,
+// SETTINGS
+Mode* modes[6] = {
+    &idleMode,
+    &timerMode,
+    &habitMode,
+    &gameMode,
+    &pomodoroMode,
+    &settingsMode
+};
+
+Mode* getMode(Face face) {
+    return modes[static_cast<int>(face)];
 }
 
+ModeManager::ModeManager()
+    : _prevFace(Face::HOME), _currentMode(getMode(Face::HOME)) {}
+
 void ModeManager::onButtonEvent(ButtonEvent event) {
-    currentMode->onButtonEvent(event);
+    _currentMode->onButtonEvent(event);
 }
 
 int32_t ModeManager::onEncoderChange(int32_t encoderVal) {
-    return currentMode->onEncoderChange(encoderVal);
+    return _currentMode->onEncoderChange(encoderVal);
 }
 
-void ModeManager::update(face_t face) {
-    if (face != prevFace) {
-        prevFace = face;
-        currentMode = modes[face];
+void ModeManager::update(Face face) {
+    if (face != _prevFace) {
+        _prevFace = face;
+        _currentMode = getMode(face);
         encoder.write(0);
     }
-    currentMode->update();
+    _currentMode->update();
 }
 
 void ModeManager::display() {
-    currentMode->display();
+    _currentMode->display();
 }

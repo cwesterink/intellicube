@@ -3,7 +3,7 @@
 
 Cube::Cube():
     _pattern{false},
-    _faceDebouncer(0, 3000)
+    _faceDebouncer(Face::HOME, 3000)
 {
     for (int i = 0; i < 4; i++) {
         pinMode(SENSOR_PINS[i], INPUT);
@@ -11,7 +11,7 @@ Cube::Cube():
     }
 }
 
-face_t Cube::getTestFace(const bool pattern[4]) {
+Face Cube::getTestFace(const bool pattern[4]) {
     for (size_t i = 0; i < 4; i++) {
         _pattern[i] = pattern[i];
     }
@@ -19,10 +19,10 @@ face_t Cube::getTestFace(const bool pattern[4]) {
     return _getRawFace();
 }
 
-face_t Cube::getFace() {
+Face Cube::getFace() {
   // Get the raw face from the sensor readings.
     _readSensors();
-    face_t currentFace = _getRawFace();
+    Face currentFace = _getRawFace();
     return _faceDebouncer.update(currentFace);
 }
 
@@ -46,7 +46,7 @@ void Cube::display() {
     Serial.println(_pattern[2]);
 }
 
-face_t Cube::_getRawFace() {
+Face Cube::_getRawFace() {
 
     int numOnes = 0;
     bool noStreak = true;
@@ -63,21 +63,18 @@ face_t Cube::_getRawFace() {
     switch (numOnes)
     {
     case 0:
-        return 5;
+        return Face::SETTINGS;
     case 1:
-        return 1;
+        return Face::GAME;
     case 2:
         if (noStreak) {
-            return 3;
+            return Face::HABIT;
         } else {
-            return 2;
+            return Face::TIMER;
         }
     case 3:
-        return 4;
-    case 4:
-        return 0;
-
+        return Face::RELAX;
     default:
-        return -1;
+        return Face::HOME;
     }
 }

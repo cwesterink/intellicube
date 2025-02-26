@@ -20,6 +20,7 @@ class HabitMode : public Mode {
         void update() override;    // Update the timer (elapsed time)
         void display() override;   // Display the timer on the LCD
 
+        rgb_color getColor() override { return rgb_color(128, 0, 255); }
         String getName() override { return "Habit"; }
         
         void onButtonEvent(ButtonEvent event) override;

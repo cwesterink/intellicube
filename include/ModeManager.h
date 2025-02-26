@@ -13,17 +13,18 @@
 #include "Cube.h"
 
 class ModeManager {
-public:
-    ModeManager();
-    void update(face_t face);
-    void display();
+    public:
+        ModeManager();
+        void update(Face face);
+        void display();
 
-    void onButtonEvent(ButtonEvent event);
-    int32_t onEncoderChange(int32_t encoderVal);
-private:
-    Mode* modes[6];
-    Mode* currentMode;
-    face_t prevFace;
+        rgb_color getColor() { return _currentMode->getColor(); }
+        void onButtonEvent(ButtonEvent event);
+        int32_t onEncoderChange(int32_t encoderVal);
+    private:
+        Mode* _modes[6];
+        Mode* _currentMode;
+        Face _prevFace;
 };
 
 #endif

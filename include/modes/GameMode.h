@@ -15,6 +15,8 @@ class GameMode : public Mode {
         void update() override;    // Update the timer (elapsed time)
         void display() override;   // Display the timer on the LCD
 
+        rgb_color getColor() override { return rgb_color(0, 255, 128); }
+        
         String getName() override { return "Game"; }
         
         void onButtonEvent(ButtonEvent event) override;

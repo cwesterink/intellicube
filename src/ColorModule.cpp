@@ -1,42 +1,41 @@
 #include "ColorModule.h"
+#include <Pins.h>
 
 
 PololuLedStrip<LED_PIN> ledStrip;
 
-ColorModule::ColorModule() : _prevFace(255) {
-
-    _modeColor[0] = {0, 255, 0};  
-    _modeColor[1] = {255, 0, 0};  
-    _modeColor[2] = {0, 0, 255};  
-    _modeColor[3] = {255, 255, 0};
-    _modeColor[4] = {0, 255, 255};
-    _modeColor[5] = {255, 0, 255};
-    _currentColor[0] = _modeColor[0];
+bool colorsEqual(rgb_color color1, rgb_color color2) {
+    return color1.red == color2.red && 
+        color1.green == color2.green &&
+        color1.blue == color2.blue;
 }
 
-void ColorModule::setColor(face_t face, rgb_color color) {
-    _modeColor[face] = color;
-}
-
-void ColorModule::overrideColor(rgb_color color) {
+ColorModule::ColorModule() : _prevColor({0, 0, 0}) {
     for (int i = 0; i < LED_COUNT; i++){
-        _currentColor[i] = color;
+        _colorArray[i] = {0, 0, 0};
     }
 }
 
-rgb_color ColorModule::getColor(face_t face) {
-    return _modeColor[face];
-}
-
-void ColorModule::update(face_t face) {
-    if (face != _prevFace) {
-        _prevFace = face;
-        for (int i = 0; i < LED_COUNT; i++){
-            _currentColor[i] = _modeColor[face];
-        }
+void ColorModule::display(rgb_color color) {
+    if (colorsEqual(color, _prevColor) || !_lights_on) {
+        return;
     }
+    _prevColor = color;
+    for (int i = 0; i < LED_COUNT; i++){
+        _colorArray[i] = color;
+    }
+    ledStrip.write(_colorArray, LED_COUNT);
 }
 
-void ColorModule::display() {
-    ledStrip.write(_currentColor, LED_COUNT);
+void ColorModule::turnOff() {
+    _lights_on = false;
+    _prevColor = {0, 0, 0};
+    for (int i = 0; i < LED_COUNT; i++){
+        _colorArray[i] = {0, 0, 0};
+    }
+    ledStrip.write(_colorArray, LED_COUNT);
+}
+
+void ColorModule::turnOn() {
+    _lights_on = true;
 }

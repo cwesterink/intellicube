@@ -16,6 +16,7 @@ class MultiMode : public Mode {
 
         void display() override;
         void onButtonEvent(ButtonEvent event) override;
+        rgb_color getColor() override { return _modes[_selectedMode]->getColor(); }
         int32_t onEncoderChange(int32_t encoderVal) override;
 
         String getName() { return _name; };
@@ -23,7 +24,7 @@ class MultiMode : public Mode {
     private:
         String _name; 
         bool isSelected = false;
-        face_t _selectedMode = 0;
+        uint8_t _selectedMode = 0;
         std::vector<Mode*> _modes;
         size_t _modeCount;
 };
