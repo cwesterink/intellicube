@@ -9,6 +9,7 @@
 #include "modes/GameMode.h"
 #include "modes/SettingsMode.h"
 #include "modes/MuliMode.h"
+#include "modes/RelaxMode.h"
 
 #include "Cube.h"
 

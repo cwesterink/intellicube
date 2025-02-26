@@ -7,7 +7,7 @@ extern RotaryEncoder encoder;
 IdleMode idleMode;
 GameMode gameMode;
 HabitMode habitMode;
-PomodoroMode pomodoroMode;
+RelaxMode relaxMode;
 TimerMode timerMode;
 SettingsMode settingsMode;
 
@@ -22,7 +22,7 @@ Mode* modes[6] = {
     &timerMode,
     &habitMode,
     &gameMode,
-    &pomodoroMode,
+    &relaxMode,
     &settingsMode
 };
 
