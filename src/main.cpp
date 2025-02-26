@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include "Cube.h"
-#include "test.h"
 #include <Encoder.h>
 #include <LiquidCrystal_I2C.h>
 
