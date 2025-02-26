@@ -16,9 +16,9 @@ class Cube {
         face_t getTestFace(const bool pattern[4]);
         void display();
     private:
-        Debouncer<face_t> _faceDebouncer;
         int _sensorPins[4];
         bool _pattern[4];
+        Debouncer<face_t> _faceDebouncer;
         bool _readSensor(int sensor);
         void _readSensors();
         face_t _getRawFace();

@@ -4,8 +4,8 @@
 // Cube sensor pins
 #define TOP_LEFT_SENSOR_PIN 7
 #define TOP_RIGHT_SENSOR_PIN 6
-#define BOTTOM_RIGHT_SENSOR_PIN 5
-#define BOTTOM_LEFT_SENSOR_PIN 4
+#define BOTTOM_RIGHT_SENSOR_PIN 4
+#define BOTTOM_LEFT_SENSOR_PIN 5
 
 // Rotary Encoder pins
 #define ENCODER_CLOCK_PIN 2
