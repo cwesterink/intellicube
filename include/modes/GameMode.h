@@ -11,7 +11,7 @@ extern LiquidCrystal_I2C lcd;
 
 class GameMode : public Mode {
     public:
-        GameMode() {};
+        GameMode(): _waitTime(0), _elapsedTime(0), _startTime(0) {};
         void update() override;    // Update the timer (elapsed time)
         void display() override;   // Display the timer on the LCD
 

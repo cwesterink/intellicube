@@ -3,7 +3,7 @@
 
 ClockManager::ClockManager()
     : regularTimerRunning(false), pomodoroRunning(false),
-      pomodoroState(PomodoroState::Idle) {}
+        pomodoroState(PomodoroState::Idle), workDuration(0), breakDuration(0) {}
 
 // ---------- REGULAR TIMER FUNCTIONS ----------
 

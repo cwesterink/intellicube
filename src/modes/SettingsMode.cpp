@@ -6,7 +6,6 @@
 extern LiquidCrystal_I2C lcd;
 extern ColorModule colorModule;
 
-
 void SettingsMode::display() {
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -19,6 +18,7 @@ void SettingsMode::display() {
         lcd.print("Off");
     }
 }
+
 void SettingsMode::onButtonEvent(ButtonEvent event) {
     if (event == ButtonEvent::Click) {
         _lightOn = !_lightOn;

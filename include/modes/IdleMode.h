@@ -13,7 +13,7 @@ extern RTC_DS3231 rtc;
 
 class IdleMode : public Mode {
     public:
-        IdleMode() {};
+        IdleMode(): _dateStr(), _timeStr(), _message() {};
         void update() override;    // Update the timer (elapsed time)
         void display() override;   // Display the timer on the LCD
 

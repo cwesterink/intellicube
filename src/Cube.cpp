@@ -3,20 +3,12 @@
 
 Cube::Cube():
     _pattern{false},
-    _faceDebouncer(Face::HOME, 3000)
+    _faceDebouncer(Face::HOME, 2000)
 {
     for (int i = 0; i < 4; i++) {
         pinMode(SENSOR_PINS[i], INPUT);
         _sensorPins[i] = SENSOR_PINS[i];
     }
-}
-
-Face Cube::getTestFace(const bool pattern[4]) {
-    for (size_t i = 0; i < 4; i++) {
-        _pattern[i] = pattern[i];
-    }
-    
-    return _getRawFace();
 }
 
 Face Cube::getFace() {
@@ -34,16 +26,6 @@ void Cube::_readSensors() {
     for (int i = 0; i < 4; i++) {
         _pattern[i] = _readSensor(i);
     }
-}
-
-void Cube::display() {
-    Serial.print(_pattern[0]);
-    Serial.print("  ");
-    Serial.println(_pattern[1]);
-
-    Serial.print(_pattern[3]);
-    Serial.print("  ");
-    Serial.println(_pattern[2]);
 }
 
 Face Cube::_getRawFace() {

@@ -23,9 +23,8 @@ class ModeManager {
         void onButtonEvent(ButtonEvent event);
         int32_t onEncoderChange(int32_t encoderVal);
     private:
-        Mode* _modes[6];
-        Mode* _currentMode;
         Face _prevFace;
+        Mode* _currentMode;
 };
 
 #endif
