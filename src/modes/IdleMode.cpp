@@ -19,7 +19,7 @@ void IdleMode::update() {
     // Update the idle mode logic
     DateTime now = rtc.now();
     
-    uint8_t hr = now.hour();
+    uint8_t hr = now.hour() + 1;
 
     uint8_t hour12 = hr % 12;
     if (hour12 == 0) hour12 = 12;
@@ -42,8 +42,6 @@ void IdleMode::update() {
 
 void IdleMode::display() {
     // Display the idle mode on the LCD
-    lcd.clear();
-    // Display on LCD
     lcd.clear();
     lcd.setCursor(2, 0); lcd.print(_dateStr);
     lcd.setCursor(2, 1); lcd.print(_timeStr);
