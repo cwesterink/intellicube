@@ -17,7 +17,7 @@ void GameMode::update() {
 void GameMode::display() {
     // Display the game on the LCD
     lcd.clear();
-    lcd.print("Game Mode");
+    lcd.print("--- Reaction Time --");
     if (_state == SETUP) {
         lcd.setCursor(0, 1);
         lcd.print("Press to start");
@@ -45,5 +45,6 @@ void GameMode::onButtonEvent(ButtonEvent event) {
             _score = millis() - _startTime;
             _state = SETUP;
         }
+        display();
     }
 }

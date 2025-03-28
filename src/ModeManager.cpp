@@ -54,11 +54,12 @@ void ModeManager::update(Face face) {
         _prevFace = face;
         _currentMode = getMode(face);
         encoder.setPosition(0);
+        _currentMode->display();
     }
 
-    if (isFaceChanged || millis() - _lastRefreshTime > _currentMode->getRefreshRate()) {
+    uint16_t rate = _currentMode->getRefreshRate();
+    if (isFaceChanged || (rate > 0 && millis() - _lastRefreshTime > rate)) {
         _currentMode->update();
-        _currentMode->display();
         _lastRefreshTime = millis();
     }
 }

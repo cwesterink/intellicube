@@ -75,7 +75,6 @@ void loop() {
         }
     }
 
-
     button.update();
     ButtonEvent event = button.getEvent();
     if (event != ButtonEvent::None) {

@@ -15,7 +15,12 @@ class GameMode : public Mode {
         void display() override;   // Display the timer on the LCD
 
         rgb_color getColor() override { return rgb_color(0, 255, 128); }
-        uint16_t getRefreshRate() override { return 150; }
+        uint16_t getRefreshRate() override {
+            if (_state == WAIT) {
+                return 100;
+            }
+            return 0;
+        }
 
         String getName() override { return "Game"; }
         
