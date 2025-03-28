@@ -11,6 +11,7 @@ public:
     void display() override;
     void onButtonEvent(ButtonEvent event) override;
 
+    uint16_t getRefreshRate() override { return 1000; }
     rgb_color getColor() override { return rgb_color(255, 128, 0); }
     String getName() override { return "Study Timer"; }
 

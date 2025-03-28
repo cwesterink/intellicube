@@ -17,12 +17,12 @@ class ModeManager {
     public:
         ModeManager();
         void update(Face face);
-        void display();
 
         rgb_color getColor() { return _currentMode->getColor(); }
         void onButtonEvent(ButtonEvent event);
         int32_t onEncoderChange(int32_t encoderVal);
     private:
+        unsigned long _lastRefreshTime = millis();
         Face _prevFace;
         Mode* _currentMode;
 };

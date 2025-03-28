@@ -14,6 +14,7 @@ class SettingsMode : public Mode {
 
         void display() override;
         void onButtonEvent(ButtonEvent event) override;
+        uint16_t getRefreshRate() override { return 1000; }
 
         rgb_color getColor() override { return rgb_color(255, 255, 128); }
         String getName() override { return "Settings"; }

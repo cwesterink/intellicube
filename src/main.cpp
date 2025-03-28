@@ -59,7 +59,7 @@ void loop() {
 
     modeManager.update(face);
     clockManager.update();
-    modeManager.display();
+
     colorModule.display(modeManager.getColor());
     // Handle encoder input
     RotaryEncoderResult encoderResult = encoder.read();
@@ -73,7 +73,5 @@ void loop() {
     if (event != ButtonEvent::None) {
         modeManager.onButtonEvent(event);
     }
-    
-    delay(150);
 }
 

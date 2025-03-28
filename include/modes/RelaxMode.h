@@ -12,6 +12,7 @@ class RelaxMode : public Mode {
 
         void display() override;
 
+        uint16_t getRefreshRate() override { return 200; }
         rgb_color getColor() override { return rgb_color(0, 128, 255); }
         String getName() override { return "Relax"; }
 

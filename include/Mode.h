@@ -15,6 +15,7 @@ class Mode {
         virtual void display() = 0;
         virtual String getName() = 0;
         virtual rgb_color getColor() = 0;
+        virtual uint16_t getRefreshRate() = 0;
 
         virtual void onButtonEvent(ButtonEvent event) {};
         virtual int32_t onEncoderChange(int32_t encoderVal) { return encoderVal; };

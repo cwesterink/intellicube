@@ -2,7 +2,6 @@
 
 RotaryEncoderResult RotaryEncoder::read() {
     int32_t rawPosition = _encoder.read();
-    
     RotaryEncoderResult result;
     result.position = rawPosition / -4;
     result.changed = rawPosition != _prevPosition;

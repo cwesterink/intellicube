@@ -48,14 +48,17 @@ int32_t ModeManager::onEncoderChange(int32_t encoderVal) {
 }
 
 void ModeManager::update(Face face) {
-    if (face != _prevFace) {
+
+    bool isFaceChanged = (face != _prevFace);
+    if (isFaceChanged) {
         _prevFace = face;
         _currentMode = getMode(face);
         encoder.write(0);
     }
-    _currentMode->update();
-}
 
-void ModeManager::display() {
-    _currentMode->display();
+    if (isFaceChanged || millis() - _lastRefreshTime > _currentMode->getRefreshRate()) {
+        _currentMode->update();
+        _currentMode->display();
+        _lastRefreshTime = millis();
+    }
 }

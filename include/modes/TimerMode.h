@@ -18,6 +18,7 @@ class TimerMode : public Mode {
         void onButtonEvent(ButtonEvent event) override;
         int32_t onEncoderChange(int32_t encoderVal) override;
 
+        uint16_t getRefreshRate() override { return 1000; }
         rgb_color getColor() override { return rgb_color(255, 0, 128); }
         String getName() override { return "Timer"; }
 

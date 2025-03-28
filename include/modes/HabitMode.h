@@ -22,7 +22,8 @@ class HabitMode : public Mode {
 
         rgb_color getColor() override { return rgb_color(128, 0, 255); }
         String getName() override { return "Habit"; }
-        
+        uint16_t getRefreshRate() override { return 1000; }
+
         void onButtonEvent(ButtonEvent event) override;
         int32_t onEncoderChange(int32_t encoderVal) override;
 
