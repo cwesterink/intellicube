@@ -11,12 +11,16 @@ class RelaxMode : public Mode {
     RelaxMode() {};
 
         void display() override;
+        void update() override { display(); }
 
-        uint16_t getRefreshRate() override { return 200; }
+        int32_t onEncoderChange(int32_t encoderVal) override;
+        uint16_t getRefreshRate() override { return _refreshRate; }
         rgb_color getColor() override { return rgb_color(0, 128, 255); }
         String getName() override { return "Relax"; }
 
     private:
+        uint16_t _refreshRate = 250;
+        int _dropPositions[20] = {-1};
 };
 
 #endif
