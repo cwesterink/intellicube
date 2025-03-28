@@ -16,12 +16,12 @@ struct habit_t {
 class HabitMode : public Mode {
     public:
         HabitMode() {};
-        void update() override;    // Update the timer (elapsed time)
-        void display() override;   // Display the timer on the LCD
+        void update() {};
+        void display() override;
 
         rgb_color getColor() override { return rgb_color(128, 0, 255); }
         String getName() override { return "Habit"; }
-        uint16_t getRefreshRate() override { return 1500; }
+        uint16_t getRefreshRate() override { return 0; }
 
         void onButtonEvent(ButtonEvent event) override;
         int32_t onEncoderChange(int32_t encoderVal) override;

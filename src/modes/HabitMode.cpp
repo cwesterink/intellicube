@@ -5,23 +5,19 @@
 int32_t HabitMode::onEncoderChange(int32_t encoderVal) {
     if (encoderVal < 0) {
         _selectedHabitId = 0;
-        return 0;
     } else if (encoderVal >= (_numHabits - 1)) {
         _selectedHabitId = _numHabits - 1;
-        return _numHabits - 1;
     } else {
         _selectedHabitId = encoderVal;
-        return encoderVal;
     }
+    display();
+    return _selectedHabitId;
 }
-
-
-void HabitMode::update() {}
-
 
 void HabitMode::onButtonEvent(ButtonEvent event) {
     if (event == ButtonEvent::Click) {
         _habits[_selectedHabitId].completed = !_habits[_selectedHabitId].completed;
+        display();
     }
 }
 
