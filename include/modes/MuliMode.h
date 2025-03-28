@@ -15,10 +15,16 @@ class MultiMode : public Mode {
             : _name(name), _modes(std::vector<Mode*>(modes)), _modeCount(modes.size()) {};
 
         void display() override;
+        void update() override {
+            if (isSelected) {
+                _modes[_selectedMode]->update();
+            }
+        }
 
         void onButtonEvent(ButtonEvent event) override;
         rgb_color getColor() override { return _modes[_selectedMode]->getColor(); }
         int32_t onEncoderChange(int32_t encoderVal) override;
+
         uint16_t getRefreshRate() override {
             if (isSelected) {
                 return _modes[_selectedMode]->getRefreshRate();

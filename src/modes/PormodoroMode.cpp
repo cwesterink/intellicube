@@ -11,7 +11,15 @@ void PomodoroMode::onButtonEvent(ButtonEvent event) {
         clockManager.startPomodoroTimer(WORK_DURATION, BREAK_DURATION);
     } else if (event == ButtonEvent::DoubleClick && clockManager.isPomodoroRunning()) {
         clockManager.stopPomodoroTimer();
+        display();
     }
+}
+
+uint16_t PomodoroMode::getRefreshRate() {
+    if (clockManager.isPomodoroRunning()) {
+        return 1000;
+    }
+    return 0;
 }
 
 void PomodoroMode::display() {

@@ -9,9 +9,11 @@ public:
     PomodoroMode() {};
 
     void display() override;
+    void update() override { display(); }
     void onButtonEvent(ButtonEvent event) override;
 
-    uint16_t getRefreshRate() override { return 1000; }
+    uint16_t getRefreshRate() override;
+
     rgb_color getColor() override { return rgb_color(255, 128, 0); }
     String getName() override { return "Study Timer"; }
 
