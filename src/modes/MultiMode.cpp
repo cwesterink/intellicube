@@ -37,9 +37,11 @@ void MultiMode::onButtonEvent(ButtonEvent event) {
     if (!isSelected) {
         if (event == ButtonEvent::Click) {
             isSelected = true;
+            display();
         }
     } else if (event == ButtonEvent::Hold) {
         isSelected = false;
+        display();
     } else {
         _modes[_selectedMode]->onButtonEvent(event);
     }
@@ -49,6 +51,10 @@ void MultiMode::onButtonEvent(ButtonEvent event) {
 int32_t MultiMode::onEncoderChange(int32_t encoderVal) {
     if (!isSelected) {
         _selectedMode = constrain(encoderVal, 0, _modeCount - 1);
+        if (_selectedMode == encoderVal) {
+            // Within bounds, refresh screen
+            display();
+        }
         return _selectedMode;
     }
     return _modes[_selectedMode]->onEncoderChange(encoderVal);

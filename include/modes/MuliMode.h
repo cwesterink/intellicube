@@ -23,7 +23,7 @@ class MultiMode : public Mode {
             if (isSelected) {
                 return _modes[_selectedMode]->getRefreshRate();
             } else {
-                return 150;
+                return 0;
             }
          }
 
