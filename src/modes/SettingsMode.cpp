@@ -9,9 +9,9 @@ extern ColorModule colorModule;
 void SettingsMode::display() {
     lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.print("Settings");
+    lcd.print("------ Config ------");
     lcd.setCursor(0, 1);
-    lcd.print("Light: ");
+    lcd.print("Lights: ");
     if (_lightOn) {
         lcd.print("On ");
     } else {
@@ -27,5 +27,6 @@ void SettingsMode::onButtonEvent(ButtonEvent event) {
         } else {
             colorModule.turnOff();
         }
+        display();
     }
 }
