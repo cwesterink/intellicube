@@ -22,6 +22,7 @@ class IdleMode : public Mode {
         String getName() override { return "Idle"; }
 
     private:
+        uint8_t _prevMin = 0;
         char _dateStr[20];
         char _timeStr[20];
         char _message[20];

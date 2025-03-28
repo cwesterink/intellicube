@@ -18,7 +18,12 @@ void IdleMode::update() {
 
     // Update the idle mode logic
     DateTime now = rtc.now();
-    
+
+    uint8_t min = now.minute();
+    if (min == _prevMin) {
+        return;
+    }
+
     uint8_t hr = now.hour() + 1;
 
     uint8_t hour12 = hr % 12;
@@ -28,7 +33,7 @@ void IdleMode::update() {
     snprintf(_dateStr, sizeof(_dateStr), "%s  %02d-%s-%02d",
              dayOfWeek(now.dayOfTheWeek()), now.day(), monthAbbrev(now.month()), now.year());
     
-    snprintf(_timeStr, sizeof(_timeStr), "    %02d : %02d %s   ", hour12, now.minute(), ampm);
+    snprintf(_timeStr, sizeof(_timeStr), "    %02d : %02d %s   ", hour12, min, ampm);
 
     if (hr < 12) {
         snprintf(_message, sizeof(_message), "Good Morning!");
@@ -37,6 +42,8 @@ void IdleMode::update() {
     } else {
         snprintf(_message, sizeof(_message), "Good Evening!");
     }
+    _prevMin = min;
+    display();
 }
 
 
