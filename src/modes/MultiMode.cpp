@@ -17,9 +17,8 @@ void MultiMode::display() {
     
         lcd.clear();
 
-        lcd.print("-------");
         lcd.print(_name);
-        lcd.print("-------");
+
     
         size_t numRows = std::min((size_t)3, _modeCount);
         for (size_t i = 0; i < numRows; i++) {

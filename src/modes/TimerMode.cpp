@@ -12,6 +12,7 @@ int32_t TimerMode::onEncoderChange(int32_t encoderVal) {
         if (encoderVal < 0) {
             return 0;
         }
+        display();
     }
     return encoderVal;
 }
@@ -23,6 +24,13 @@ void TimerMode::onButtonEvent(ButtonEvent event) {
     } else if (event == ButtonEvent::Hold && clockManager.isTimerRunning()) {
         clockManager.stopTimer();
     }
+}
+
+uint16_t TimerMode::getRefreshRate() {
+    if (clockManager.isTimerRunning()) {
+        return 1000;
+    }
+    return 0;
 }
 
 void TimerMode::display() {
