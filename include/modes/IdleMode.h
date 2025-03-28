@@ -5,7 +5,6 @@
 #include <Arduino.h>
 #include "Mode.h"
 #include <LiquidCrystal_I2C.h>
-#include <Encoder.h>
 #include <RTClib.h>
 
 extern LiquidCrystal_I2C lcd;

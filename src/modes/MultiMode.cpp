@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include "modes/MuliMode.h"
 #include <LiquidCrystal_I2C.h>
-#include <Encoder.h>
 #include <algorithm>
 
 extern LiquidCrystal_I2C lcd;

@@ -5,7 +5,6 @@
 #include <Arduino.h>
 #include "Mode.h"
 #include <LiquidCrystal_I2C.h>
-#include <Encoder.h>
 
 extern LiquidCrystal_I2C lcd;
 
@@ -22,7 +21,7 @@ class HabitMode : public Mode {
 
         rgb_color getColor() override { return rgb_color(128, 0, 255); }
         String getName() override { return "Habit"; }
-        uint16_t getRefreshRate() override { return 1000; }
+        uint16_t getRefreshRate() override { return 1500; }
 
         void onButtonEvent(ButtonEvent event) override;
         int32_t onEncoderChange(int32_t encoderVal) override;

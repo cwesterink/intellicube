@@ -4,7 +4,6 @@
 
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
-#include <Encoder.h>
 #include "Button.h"
 #include <PololuLedStrip.h>
 

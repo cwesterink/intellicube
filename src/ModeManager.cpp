@@ -53,7 +53,7 @@ void ModeManager::update(Face face) {
     if (isFaceChanged) {
         _prevFace = face;
         _currentMode = getMode(face);
-        encoder.write(0);
+        encoder.setPosition(0);
     }
 
     if (isFaceChanged || millis() - _lastRefreshTime > _currentMode->getRefreshRate()) {

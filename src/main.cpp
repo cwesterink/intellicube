@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include "Cube.h"
-#include <Encoder.h>
 #include <LiquidCrystal_I2C.h>
 
 
@@ -10,6 +9,7 @@
 #include <ModeManager.h>
 #include <ClockManager.h>
 #include <ColorModule.h>
+#include <RotaryEncoder.h>
 
 // Cube representation 
 Cube cube;
@@ -20,7 +20,7 @@ ClockManager clockManager;
 ColorModule colorModule;
 
 // Inputs
-RotaryEncoder encoder(ENCODER_CLOCK_PIN, ENCODER_DATA_PIN);
+RotaryEncoder encoder(ENCODER_CLOCK_PIN, ENCODER_DATA_PIN, RotaryEncoder::LatchMode::FOUR3);
 Button button(BUTTON_PIN);
 RTC_DS3231 rtc;
 
@@ -56,17 +56,25 @@ void setup() {
 
 void loop() {
     Face face = cube.getFace();
+    static int pos = 0;
 
     modeManager.update(face);
     clockManager.update();
 
     colorModule.display(modeManager.getColor());
     // Handle encoder input
-    RotaryEncoderResult encoderResult = encoder.read();
-    if (encoderResult.changed) {
-        int32_t setPosition = modeManager.onEncoderChange(encoderResult.position);
-        encoder.write(setPosition);
+    encoder.tick();
+
+    int newPos = encoder.getPosition();
+    if (pos != newPos) {
+        pos = newPos;        
+        int32_t returnPos = modeManager.onEncoderChange(newPos);
+        if (returnPos != newPos) {
+            encoder.setPosition(returnPos);
+            pos = returnPos;
+        }
     }
+
 
     button.update();
     ButtonEvent event = button.getEvent();
