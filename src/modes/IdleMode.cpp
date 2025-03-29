@@ -52,7 +52,7 @@ void IdleMode::display() {
     lcd.clear();
     lcd.setCursor(2, 0); lcd.print(_dateStr);
     lcd.setCursor(2, 1); lcd.print(_timeStr);
-    lcd.setCursor(0, 2); lcd.print("--------------------");
+    lcd.setCursor(0, 2); lcd.print("-------------------");
 
-    lcd.setCursor(4, 3); lcd.print(_message);
+    lcd.setCursor(3, 3); lcd.print(_message);
 }

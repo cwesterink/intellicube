@@ -38,6 +38,7 @@ class GameMode : public Mode {
         unsigned long _waitTime;
         unsigned long _elapsedTime;
         unsigned long _score = 0;
+        unsigned long _highScore = 5000;
         unsigned long _startTime;  // Start time in milliseconds
 
 };
